@@ -1,0 +1,8 @@
+{
+	"name": "Absorb",
+	"type": "GRASS",
+	"category": "SPECIAL",
+	"pp": [25, 40],
+	"power": 20,
+	"accuracy": 100
+}

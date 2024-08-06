@@ -1,0 +1,8 @@
+{
+	"name": "Acid",
+	"type": "POISON",
+	"category": "SPECIAL",
+	"pp": [30, 48],
+	"power": 40,
+	"accuracy": 100
+}
