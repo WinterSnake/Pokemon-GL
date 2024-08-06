@@ -21,21 +21,23 @@ struct Move
 		} const Category;
 		uint8_t PP;
 		uint8_t MaxPP;
-	public:
-		Move(const std::string, const ElementType, const CategoryType, uint8_t, uint8_t);
+		uint8_t Power;
+		uint8_t Accuracy;
 };
 
 const std::array<Move, 2> MoveList = {
-	Move("Absorb",
-		ElementType::Grass,
-		Move::CategoryType::Special,
-		25, 40,   // PP | Max PP
-		20, 100,  // Power | Accuracy
-	),
-	Move("Acid",
-		ElementType::Poison,
-		Move::CategoryType::Special,
-		30, 48,   // PP | Max PP
-		40, 100,  // Power | Accuracy
-	),
+	(Move){
+		.Name = "Absorb",
+		.Type = ElementType::Grass,
+		.Category = Move::CategoryType::Special,
+		.PP = 25, .MaxPP = 40,
+		.Power = 20, .Accuracy = 100
+	},
+	(Move){
+		.Name = "Acid",
+		.Type = ElementType::Poison,
+		.Category = Move::CategoryType::Special,
+		.PP = 30, .MaxPP = 48,
+		.Power = 40, .Accuracy = 100
+	},
 };
