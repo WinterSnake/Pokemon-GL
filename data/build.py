@@ -55,9 +55,10 @@ def write_type_header(file_input: Path, file_output: Path) -> None:
         "#include <array>\n",
         "#include <string>\n",
         '\n',
-        f"#define ELEMENT_COUNT {type_count}\n",
         f"#define ELEMENT_NAME(name) static_cast<std::underlying_type<ElementType>::type>(ElementType::name)\n",
         f"#define ELEMENT_VALUE(value) static_cast<std::underlying_type<ElementType>::type>(value)\n",
+        '\n',
+        "constexpr size_t ELEMENT_COUNT = 18;\n",
         '\n',
     ])
     # --Enum
@@ -78,7 +79,7 @@ def write_type_header(file_input: Path, file_output: Path) -> None:
     # --Multiplier
     fp.writelines([
         f"// [Attack Type][Defense Type 1][Defense Type 2]\n",
-        "const std::array<std::array<std::array<float, ELEMENT_COUNT>, ELEMENT_COUNT>, ELEMENT_COUNT> ElementMultiplierLookupTable = {{\n",
+        "constexpr std::array<std::array<std::array<const float, ELEMENT_COUNT>, ELEMENT_COUNT>, ELEMENT_COUNT> ElementMultiplierLookupTable = {{\n",
     ])
     for attack_type, defense_types in type_lookups.items():
         fp.write(f"\t[ELEMENT_NAME({attack_type})] = {{{{\n")

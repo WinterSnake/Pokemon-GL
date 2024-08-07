@@ -1,0 +1,9 @@
+{
+	"name": "Growl",
+	"type": "Normal",
+	"category": "Status",
+	"description": "The pokemon growls in an endearing way, making the foe less wary. The foe’s Attack stat is lowered.",
+	"pp": [40, 64],
+	"power": 0,
+	"accuracy": 100
+}

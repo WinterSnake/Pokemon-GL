@@ -1,0 +1,9 @@
+{
+	"name": "Tackle",
+	"type": "Normal",
+	"category": "Physical",
+	"description": "A physical attack in which the pokemon charges and slams into the foe with its whole body.",
+	"pp": [35, 56],
+	"power": 35,
+	"accuracy": 100
+}

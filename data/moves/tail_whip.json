@@ -1,0 +1,9 @@
+{
+	"name": "Tail Whip",
+	"type": "Normal",
+	"category": "Status",
+	"description": "The pokemon wags its tail cutely, making the foe less wary. The foe’s Defense stat is lowered.",
+	"pp": [40, 64],
+	"power": 0,
+	"accuracy": 100
+}

@@ -1,0 +1,9 @@
+{
+	"name": "Scratch",
+	"type": "Normal",
+	"category": "Physical",
+	"description": "Hard, pointed, and sharp claws rake the foe to inflict damage.",
+	"pp": [35, 56],
+	"power": 35,
+	"accuracy": 100
+}
