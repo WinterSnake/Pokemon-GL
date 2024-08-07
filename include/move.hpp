@@ -24,20 +24,3 @@ struct Move
 		uint8_t Power;
 		uint8_t Accuracy;
 };
-
-const std::array<Move, 2> MoveList = {
-	(Move){
-		.Name = "Absorb",
-		.Type = ElementType::Grass,
-		.Category = Move::CategoryType::Special,
-		.PP = 25, .MaxPP = 40,
-		.Power = 20, .Accuracy = 100
-	},
-	(Move){
-		.Name = "Acid",
-		.Type = ElementType::Poison,
-		.Category = Move::CategoryType::Special,
-		.PP = 30, .MaxPP = 48,
-		.Power = 40, .Accuracy = 100
-	},
-};

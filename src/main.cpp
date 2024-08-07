@@ -11,15 +11,15 @@ int main(int argc, char** argv)
 {
 	(void)argc;
 	(void)argv;
-	ElementType attackType   = ElementType::Fire;
-	ElementType defenseType1 = ElementType::Water;
-	ElementType defenseType2 = ElementType::None;
-	std::string attackName   = TypeNameLookupTable[static_cast<uint8_t>(attackType)];
-	std::string defenseName1 = TypeNameLookupTable[static_cast<uint8_t>(defenseType1)];
-	std::string defenseName2 = "None";
-	if (defenseType2 != ElementType::None)
-		defenseName2 = TypeNameLookupTable[static_cast<uint8_t>(defenseType2)];
-	float attackMultiplier = calculate_attack_multiplier(attackType, defenseType1, defenseType2);
-	std::cout << '[' << attackName << "] type attacking [" << defenseName1 << ',' << defenseName2 << "] type. Multiplier: " << attackMultiplier << '\n';
+	ElementType attack   = ElementType::Fighting;
+	ElementType defense1 = ElementType::Bug;
+	ElementType defense2 = ElementType::Ghost;
+	std::string typeNames[3] = {
+		ElementNameLookupTable[ELEMENT_VALUE(attack)],
+		ElementNameLookupTable[ELEMENT_VALUE(defense1)],
+		ElementNameLookupTable[ELEMENT_VALUE(defense2)],
+	};
+	float multiplier = ElementMultiplierLookupTable[ELEMENT_VALUE(attack)][ELEMENT_VALUE(defense1)][ELEMENT_VALUE(defense2)];
+	std::cout << "Attack[" << typeNames[0] << "] vs Creature[" << typeNames[1] << ',' << typeNames[2] << "] = " << multiplier << '\n';
 	return 0;
 }

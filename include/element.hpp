@@ -3,9 +3,10 @@
 #include <array>
 #include <string>
 
-#define ELEMENT_COUNT 18
 #define ELEMENT_NAME(name) static_cast<std::underlying_type<ElementType>::type>(ElementType::name)
 #define ELEMENT_VALUE(value) static_cast<std::underlying_type<ElementType>::type>(value)
+
+constexpr size_t ELEMENT_COUNT = 18;
 
 enum class ElementType : uint8_t
 {
@@ -51,7 +52,7 @@ const std::array<const std::string, ELEMENT_COUNT> ElementNameLookupTable = {{
 }};
 
 // [Attack Type][Defense Type 1][Defense Type 2]
-const std::array<std::array<std::array<float, ELEMENT_COUNT>, ELEMENT_COUNT>, ELEMENT_COUNT> ElementMultiplierLookupTable = {{
+constexpr std::array<std::array<std::array<const float, ELEMENT_COUNT>, ELEMENT_COUNT>, ELEMENT_COUNT> ElementMultiplierLookupTable = {{
 	[ELEMENT_NAME(Normal)] = {{
 		[ELEMENT_NAME(Normal)] = {{
 			[ELEMENT_NAME(Normal)] = 1.0f,
