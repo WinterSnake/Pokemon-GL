@@ -112,8 +112,8 @@ def write_moves_header(input_path: Path, output_file: Path) -> None:
             "#include <string>\n",
             "#include \"pokemon.hpp\"\n",
             '\n',
-            f"constexpr size_t MOVES_COUNT = {len(moves)};\n",
-            "const std::array<const MoveInfo, MOVES_COUNT> POKEMON_MOVES = {{\n"
+            f"constexpr size_t MOVE_COUNT = {len(moves)};\n",
+            "const std::array<const MoveInfo, MOVE_COUNT> POKEMON_MOVES = {{\n"
         ])
         for move in moves:
             if len(move['name']) > move_name_len:

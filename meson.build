@@ -6,4 +6,4 @@ depgl = dependency('opengl')
 depglfw = dependency('glfw3')
 
 # -Output
-executable('pokemon', sources: ['./src/main.cpp', './src/pokemon.cpp'], include_directories: './include', dependencies: [depgl, depglfw])
+executable('pokemon', sources: ['./src/main.cpp', './src/pokemon.cpp', './src/battle.cpp'], include_directories: './include', dependencies: [depgl, depglfw])
