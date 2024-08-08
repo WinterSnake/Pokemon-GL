@@ -5,6 +5,7 @@
 ##-------------------------------##
 
 ## Imports
+import json
 from configparser import ConfigParser
 from pathlib import Path
 from typing import Any, TextIO
@@ -12,10 +13,12 @@ from typing import Any, TextIO
 ## Constants
 TYPE_CHART_INPUT: Path = Path("./types.ini")
 TYPE_CHART_OUTPUT: Path = Path("./element.hpp")
+POKEMON_SPECIES_INPUT: Path = Path("./pokemon/")
+POKEMON_SPECIES_OUTPUT: Path = Path("./species.hpp")
 
 
 ## Functions
-def write_type_header(file_input: Path, file_output: Path) -> None:
+def write_element_header(file_input: Path, file_output: Path) -> None:
     """Read types.ini file and produce a C++ header file"""
     type_chart: ConfigParser = ConfigParser(inline_comment_prefixes=';')
     type_chart.read(file_input)
@@ -93,5 +96,46 @@ def write_type_header(file_input: Path, file_output: Path) -> None:
     fp.close()
 
 
+def write_species_header(input_path: Path, output_file: Path) -> None:
+    """"""
+    species = []
+    species_name_len: int = 0
+    for species_file in input_path.glob("*.json"):
+        with species_file.open('r') as f:
+            species.append(json.load(f))
+    with output_file.open('w') as f:
+        f.writelines([
+            "#pragma once\n",
+            "#include <array>\n",
+            "#include <string>\n",
+            "#include \"pokemon.hpp\"\n",
+            '\n',
+            f"constexpr size_t SPECIES_COUNT = {len(species)};\n"
+            "const std::array<const PokemonInfo, SPECIES_COUNT> POKEMON_SPECIES = {{\n"
+        ])
+        for i, species_ in enumerate(species):
+            if len(species_['name']) > species_name_len:
+                species_name_len = len(species_['name'])
+            element_1: str = species_['type'][0]
+            element_2: str = species_['type'][1] if len(species_['type']) == 2 else element_1
+            f.writelines([
+                "\t{\n",
+                f"\t\t.Name = \"{species_['name']}\",\n"
+                f"\t\t.Elements = {{{{ ElementType::{element_1}, ElementType::{element_2} }}}},\n"
+                "\t},\n",
+            ])
+        f.writelines([
+            "}};\n",
+            '\n',
+        ])
+        for i, species_ in enumerate(species):
+            f.writelines([
+                f"const PokemonInfo* SPECIES_{species_['name'].upper()}",
+                ' ' * (species_name_len + 1 - len(species_['name'])),
+                f"= &POKEMON_SPECIES[{i}];\n"
+            ])
+
+
 ## Body
-write_type_header(TYPE_CHART_INPUT, TYPE_CHART_OUTPUT)
+#write_element_header(TYPE_CHART_INPUT, TYPE_CHART_OUTPUT)
+write_species_header(POKEMON_SPECIES_INPUT, POKEMON_SPECIES_OUTPUT)

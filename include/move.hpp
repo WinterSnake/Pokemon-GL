@@ -7,8 +7,10 @@
 #pragma once
 #include <stdint.h>
 #include <string>
+#include "element.hpp"
 
-struct Move
+// Base move info
+struct MoveInfo
 {
 	public:
 		const std::string Name;
@@ -23,4 +25,13 @@ struct Move
 		uint8_t MaxPP;
 		uint8_t Power;
 		uint8_t Accuracy;
+};
+
+// Move counter for pokemon move sets
+struct MoveBattle
+{
+	public:
+		const MoveInfo* Info;
+		uint8_t PP;
+		uint8_t MaxPP;
 };
