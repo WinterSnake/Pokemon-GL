@@ -6,20 +6,31 @@
 #include <iostream>
 #include <string>
 #include "pokemon.hpp"
+#include "species.hpp"
+#include "moves.hpp"
 
 int main(int argc, char** argv)
 {
 	(void)argc;
 	(void)argv;
-	ElementType attack   = ElementType::Fighting;
-	ElementType defense1 = ElementType::Bug;
-	ElementType defense2 = ElementType::Ghost;
-	std::string typeNames[3] = {
-		ElementNameLookupTable[ELEMENT_VALUE(attack)],
-		ElementNameLookupTable[ELEMENT_VALUE(defense1)],
-		ElementNameLookupTable[ELEMENT_VALUE(defense2)],
+	Pokemon charmander = {
+		.Info = SPECIES_CHARMANDER,
+		.Moves = {{
+			MoveBattle(MOVE_SCRATCH),
+			MoveBattle(MOVE_EMBER),
+			MoveBattle(MOVE_GROWL),
+			NULL,
+		}}
 	};
-	float multiplier = ElementMultiplierLookupTable[ELEMENT_VALUE(attack)][ELEMENT_VALUE(defense1)][ELEMENT_VALUE(defense2)];
-	std::cout << "Attack[" << typeNames[0] << "] vs Creature[" << typeNames[1] << ',' << typeNames[2] << "] = " << multiplier << '\n';
+	Pokemon bulbasaur = {
+		.Info = SPECIES_BULBASAUR,
+		.Moves = {{
+			MoveBattle(MOVE_TACKLE),
+			MoveBattle(MOVE_ABSORB),
+			MoveBattle(MOVE_TAIL_WHIP),
+			NULL,
+		}}
+	};
+	// Battle
 	return 0;
 }
