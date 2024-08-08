@@ -182,6 +182,6 @@ def write_species_header(input_path: Path, output_file: Path) -> None:
 
 
 ## Body
-#write_element_header(TYPE_CHART_INPUT, TYPE_CHART_OUTPUT)
+write_element_header(TYPE_CHART_INPUT, TYPE_CHART_OUTPUT)
 write_moves_header(POKEMON_MOVE_INPUT, POKEMON_MOVE_OUTPUT)
-#write_species_header(POKEMON_SPECIES_INPUT, POKEMON_SPECIES_OUTPUT)
+write_species_header(POKEMON_SPECIES_INPUT, POKEMON_SPECIES_OUTPUT)

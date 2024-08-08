@@ -1,0 +1,9 @@
+{
+	"name": "Ember",
+	"type": "Fire",
+	"category": "Special",
+	"description": "The foe is attacked with small flames. The foe may also be left with a burn.",
+	"pp": [25, 40],
+	"power": 40,
+	"accuracy": 100
+}

@@ -1,9 +1,0 @@
-{
-	"name": "Acid",
-	"type": "Poison",
-	"category": "Special",
-	"description": "The opposing team is attacked with a spray of harsh acid. The acid may also lower the targets’ Sp. Def stats.",
-	"pp": [30, 48],
-	"power": 40,
-	"accuracy": 100
-}

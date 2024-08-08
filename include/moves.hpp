@@ -10,7 +10,7 @@ const std::array<const MoveInfo, MOVES_COUNT> POKEMON_MOVES = {{
 		.Type = ElementType::Normal,
 		.Category = MoveInfo::Category::Physical,
 		.PP = 35, .MaxPP = 56,
-		.Power = 35, .Accuracy = 100,
+		.Power = 35, .Accuracy = 95,
 	},
 	{
 		.Name = "Absorb",
@@ -24,7 +24,7 @@ const std::array<const MoveInfo, MOVES_COUNT> POKEMON_MOVES = {{
 		.Type = ElementType::Normal,
 		.Category = MoveInfo::Category::Physical,
 		.PP = 35, .MaxPP = 56,
-		.Power = 35, .Accuracy = 100,
+		.Power = 35, .Accuracy = 95,
 	},
 	{
 		.Name = "Growl",
@@ -34,18 +34,18 @@ const std::array<const MoveInfo, MOVES_COUNT> POKEMON_MOVES = {{
 		.Power = 0, .Accuracy = 100,
 	},
 	{
+		.Name = "Ember",
+		.Type = ElementType::Fire,
+		.Category = MoveInfo::Category::Special,
+		.PP = 25, .MaxPP = 40,
+		.Power = 40, .Accuracy = 100,
+	},
+	{
 		.Name = "Tail Whip",
 		.Type = ElementType::Normal,
 		.Category = MoveInfo::Category::Status,
 		.PP = 40, .MaxPP = 64,
 		.Power = 0, .Accuracy = 100,
-	},
-	{
-		.Name = "Acid",
-		.Type = ElementType::Poison,
-		.Category = MoveInfo::Category::Special,
-		.PP = 30, .MaxPP = 48,
-		.Power = 40, .Accuracy = 100,
 	},
 }};
 
@@ -53,5 +53,5 @@ const MoveInfo* MOVE_TACKLE    = &POKEMON_MOVES[0];
 const MoveInfo* MOVE_ABSORB    = &POKEMON_MOVES[1];
 const MoveInfo* MOVE_SCRATCH   = &POKEMON_MOVES[2];
 const MoveInfo* MOVE_GROWL     = &POKEMON_MOVES[3];
-const MoveInfo* MOVE_TAIL_WHIP = &POKEMON_MOVES[4];
-const MoveInfo* MOVE_ACID      = &POKEMON_MOVES[5];
+const MoveInfo* MOVE_EMBER     = &POKEMON_MOVES[4];
+const MoveInfo* MOVE_TAIL_WHIP = &POKEMON_MOVES[5];
