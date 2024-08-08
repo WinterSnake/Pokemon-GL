@@ -1,59 +1,57 @@
 /*
-	Pokemon
-
+	PokemonGL
 	Written By: Ryan Smith
 */
 #include <iostream>
 #include <string>
-#include "pokemon.hpp"
-#include "generated/species.hpp"
-#include "generated/moves.hpp"
-#include "battle.hpp"
+
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 
 int main(int argc, char** argv)
 {
 	(void)argc;
 	(void)argv;
-	Pokemon charmander = Pokemon::FromInfo(SPECIES_CHARMANDER, 5);
-	Pokemon bulbasaur  = Pokemon::FromInfo(SPECIES_BULBASAUR,  5);
-	// Battle
-	BattleInstance battle;
-	battle.AddPokemon(charmander, BattlePosition::User);
-	battle.AddPokemon(bulbasaur, BattlePosition::Enemy);
-	while (true)
+	// GLFW: Initialize
+	if (!glfwInit())
 	{
-		// Write move output
-		for (size_t i = 0; i < charmander.Moves.size(); ++i)
-		{
-			auto move = charmander.Moves[i];
-			if (move.Info == nullptr)
-				continue;
-			if (i != 0 && i < charmander.Moves.size())
-				std::cout << " ; ";
-			std::cout << '[' << i + 1 << ']' << move.Info->Name << '(' << (int)move.PP << ')';
-		}
-		std::cout << '\n';
-		// Get move input
-		char input;
-		std::cin >> input;
-		if (input < '0' || input > '4') break;
-		uint8_t move_index = input - '0' - 1;
-		auto move = charmander.Moves[move_index];
-		// Handle invalid move
-		if (move.Info == nullptr)
-		{
-			std::cout << "Invalid move..\n";
-			continue;
-		}
-		// Handle no pp
-		else if (move.PP == 0)
-		{
-			std::cout << "No pp left..\n";
-			continue;
-		}
-		std::cout << charmander.Info->Name << " used " << move.Info->Name << '\n';
-		// Simulate battle
-		battle.AddMove(charmander.Moves[move_index]);
+		std::cerr << "Unable to init GLFW.\n";
+		return 1;
 	}
+	// GLFW: Window Options
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
+	glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_NATIVE_CONTEXT_API);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+
+	// GLFW: Create Window
+	GLFWwindow* window = glfwCreateWindow(1920, 1080, "PokemonGL", NULL, NULL);
+	if (!window)
+	{
+		std::cerr << "Unable to create a GLFW window.\n";
+		glfwTerminate();
+		return 1;
+	}
+
+	// GLFW: OpenGL
+	glfwMakeContextCurrent(window);
+	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
+	// GLFW: Loop
+	while (!glfwWindowShouldClose(window))
+	{
+		/* Events */
+		glfwPollEvents();
+		/* Rendering */
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(window);
+	}
+
+	// GLFW: Close
+	glfwDestroyWindow(window);
+	glfwTerminate();
 	return 0;
 }
