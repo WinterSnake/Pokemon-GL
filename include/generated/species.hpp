@@ -2,6 +2,7 @@
 #include <array>
 #include <string>
 #include "pokemon.hpp"
+#include "movesets.hpp"
 
 constexpr size_t SPECIES_COUNT = 3;
 const std::array<const PokemonInfo, SPECIES_COUNT> POKEMON_SPECIES = {{
