@@ -14,24 +14,8 @@ int main(int argc, char** argv)
 {
 	(void)argc;
 	(void)argv;
-	Pokemon charmander = {
-		.Info = SPECIES_CHARMANDER,
-		.Moves = {{
-			MOVE_SCRATCH,
-			MOVE_GROWL,
-			nullptr,
-			nullptr,
-		}}
-	};
-	Pokemon bulbasaur = {
-		.Info = SPECIES_BULBASAUR,
-		.Moves = {{
-			MOVE_TACKLE,
-			MOVE_TAIL_WHIP,
-			nullptr,
-			nullptr,
-		}}
-	};
+	Pokemon charmander = Pokemon::FromInfo(SPECIES_CHARMANDER, 5);
+	Pokemon bulbasaur  = Pokemon::FromInfo(SPECIES_BULBASAUR,  5);
 	// Battle
 	BattleInstance battle;
 	battle.AddPokemon(charmander, BattlePosition::User);

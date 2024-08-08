@@ -6,16 +6,20 @@
 */
 #include "pokemon.hpp"
 
-MoveBattle::MoveBattle(const MoveInfo* info):
-	Info(info)
+Pokemon Pokemon::FromInfo(const PokemonInfo* info, uint8_t level)
 {
-	if (info == nullptr)
-		return;
-	PP = info->PP;
-}
-
-Pokemon Pokemon::CreatePokemonFromInfo(const PokemonInfo* info, uint8_t level)
-{
-	(void)info;
 	(void)level;
+	// Create move array
+	std::array<MoveBattle, BATTLE_MOVES_COUNT> moves;
+	for (size_t i = 0; i < info->MovesetSize; ++i)
+	{
+		// TODO: check level moveset
+		const MoveInfo* move = info->Moveset[i].Info;
+		moves[i] = { .Info = move, .PP = move->PP }; 
+	}
+	// Return created pokemon
+	return {
+		.Info = info,
+		.Moves = moves,
+	};
 }

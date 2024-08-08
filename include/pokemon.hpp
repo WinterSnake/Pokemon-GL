@@ -41,8 +41,6 @@ struct MoveLearn
 struct MoveBattle
 {
 	public:
-		MoveBattle(const MoveInfo*);
-	public:
 		const MoveInfo* Info;
 		uint8_t PP;
 };
@@ -56,15 +54,15 @@ struct PokemonInfo
 	public:
 		const std::string Name;
 		const std::array<ElementType, 2> Elements;
-		const MoveLearn* MoveLearnset;
-		const size_t MoveLearnsetSize;
+		const MoveLearn* Moveset;
+		const size_t MovesetSize;
 };
 
 // Structure for pokemon in party
 class Pokemon
 {
 	public:
-		static Pokemon CreatePokemonFromInfo(const PokemonInfo*, uint8_t);
+		static Pokemon FromInfo(const PokemonInfo*, uint8_t);
 	public:
 		const PokemonInfo* Info;
 		std::array<MoveBattle, BATTLE_MOVES_COUNT> Moves;
