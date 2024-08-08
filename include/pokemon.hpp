@@ -9,7 +9,27 @@
 #include <string>
 
 #include "element.hpp"
-#include "move.hpp"
+
+/* Move Data */
+struct MoveInfo
+{
+	public:
+		const std::string Name;
+		const ElementType Type;
+		enum class Category : uint8_t
+		{
+			Physical,
+			Special,
+			Status,
+		} const Category;
+		uint8_t PP;
+		uint8_t MaxPP;
+		uint8_t Power;
+		uint8_t Accuracy;
+};
+
+/* Pokemon Data */
+constexpr size_t BATTLE_MOVES_COUNT = 4;
 
 struct PokemonInfo
 {
@@ -18,10 +38,8 @@ struct PokemonInfo
 		const std::array<ElementType, 2> Elements;
 };
 
-constexpr size_t BATTLE_MOVES_COUNT = 4;
 class Pokemon
 {
 	public:
 		const PokemonInfo* Info;
-		std::array<MoveBattle, BATTLE_MOVES_COUNT> Moves;
 };

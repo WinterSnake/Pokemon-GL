@@ -11,10 +11,12 @@ from pathlib import Path
 from typing import Any, TextIO
 
 ## Constants
-TYPE_CHART_INPUT: Path = Path("./types.ini")
-TYPE_CHART_OUTPUT: Path = Path("./element.hpp")
+POKEMON_MOVE_INPUT: Path = Path("./moves")
+POKEMON_MOVE_OUTPUT: Path = Path("./moves.hpp")
 POKEMON_SPECIES_INPUT: Path = Path("./pokemon/")
 POKEMON_SPECIES_OUTPUT: Path = Path("./species.hpp")
+TYPE_CHART_INPUT: Path = Path("./types.ini")
+TYPE_CHART_OUTPUT: Path = Path("./element.hpp")
 
 
 ## Functions
@@ -96,6 +98,48 @@ def write_element_header(file_input: Path, file_output: Path) -> None:
     fp.close()
 
 
+def write_moves_header(input_path: Path, output_file: Path) -> None:
+    """"""
+    moves = []
+    move_name_len: int = 0
+    for move_file in input_path.glob("*.json"):
+        with move_file.open('r') as f:
+            moves.append(json.load(f))
+    with output_file.open('w') as f:
+        f.writelines([
+            "#pragma once\n",
+            "#include <array>\n",
+            "#include <string>\n",
+            "#include \"pokemon.hpp\"\n",
+            '\n',
+            f"constexpr size_t MOVES_COUNT = {len(moves)};\n",
+            "const std::array<const MoveInfo, MOVES_COUNT> POKEMON_MOVES = {{\n"
+        ])
+        for move in moves:
+            if len(move['name']) > move_name_len:
+                move_name_len = len(move['name'])
+            f.writelines([
+                "\t{\n",
+                f"\t\t.Name = \"{move['name']}\",\n",
+                f"\t\t.Type = ElementType::{move['type']},\n",
+                f"\t\t.Category = MoveInfo::Category::{move['category']},\n",
+                f"\t\t.PP = {move['pp'][0]}, .MaxPP = {move['pp'][1]},\n",
+                f"\t\t.Power = {move['power']}, .Accuracy = {move['accuracy']},\n",
+                "\t},\n",
+            ])
+        f.writelines([
+            "}};\n",
+            '\n',
+        ])
+        for i, move in enumerate(moves):
+            name = move['name'].upper().replace(' ', '_')
+            f.writelines([
+                f"const MoveInfo* MOVE_{name}",
+                ' ' * (move_name_len + 1 - len(move['name'])),
+                f"= &POKEMON_MOVES[{i}];\n"
+            ])
+
+
 def write_species_header(input_path: Path, output_file: Path) -> None:
     """"""
     species = []
@@ -113,7 +157,7 @@ def write_species_header(input_path: Path, output_file: Path) -> None:
             f"constexpr size_t SPECIES_COUNT = {len(species)};\n"
             "const std::array<const PokemonInfo, SPECIES_COUNT> POKEMON_SPECIES = {{\n"
         ])
-        for i, species_ in enumerate(species):
+        for species_ in species:
             if len(species_['name']) > species_name_len:
                 species_name_len = len(species_['name'])
             element_1: str = species_['type'][0]
@@ -129,8 +173,9 @@ def write_species_header(input_path: Path, output_file: Path) -> None:
             '\n',
         ])
         for i, species_ in enumerate(species):
+            name = species_['name'].upper().replace(' ', '_')
             f.writelines([
-                f"const PokemonInfo* SPECIES_{species_['name'].upper()}",
+                f"const PokemonInfo* SPECIES_{name}",
                 ' ' * (species_name_len + 1 - len(species_['name'])),
                 f"= &POKEMON_SPECIES[{i}];\n"
             ])
@@ -138,4 +183,5 @@ def write_species_header(input_path: Path, output_file: Path) -> None:
 
 ## Body
 #write_element_header(TYPE_CHART_INPUT, TYPE_CHART_OUTPUT)
-write_species_header(POKEMON_SPECIES_INPUT, POKEMON_SPECIES_OUTPUT)
+write_moves_header(POKEMON_MOVE_INPUT, POKEMON_MOVE_OUTPUT)
+#write_species_header(POKEMON_SPECIES_INPUT, POKEMON_SPECIES_OUTPUT)
