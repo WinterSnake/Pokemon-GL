@@ -9,14 +9,20 @@ const std::array<const PokemonInfo, SPECIES_COUNT> POKEMON_SPECIES = {{
 	{
 		.Name = "Charmander",
 		.Elements = {{ ElementType::Fire, ElementType::Fire }},
+		.Moveset = CharmanderMoveset.data(),
+		.MovesetSize = CharmanderMoveset.size(),
 	},
 	{
 		.Name = "Bulbasaur",
 		.Elements = {{ ElementType::Grass, ElementType::Poison }},
+		.Moveset = BulbasaurMoveset.data(),
+		.MovesetSize = BulbasaurMoveset.size(),
 	},
 	{
 		.Name = "Squirtle",
 		.Elements = {{ ElementType::Water, ElementType::Water }},
+		.Moveset = SquirtleMoveset.data(),
+		.MovesetSize = SquirtleMoveset.size(),
 	},
 }};
 

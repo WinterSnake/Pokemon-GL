@@ -1,4 +1,11 @@
 {
 	"name": "Squirtle",
-	"type": ["Water"]
+	"type": ["Water"],
+	"moves": [{
+		"name": "Tackle",
+		"level": 1
+	},{
+		"name": "Tail Whip",
+		"level": 1
+	}]
 }

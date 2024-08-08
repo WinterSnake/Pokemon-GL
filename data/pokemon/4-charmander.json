@@ -1,4 +1,11 @@
 {
 	"name": "Charmander",
-	"type": ["Fire"]
+	"type": ["Fire"],
+	"moves": [{
+		"name": "Scratch",
+		"level": 1
+	},{
+		"name": "Growl",
+		"level": 1
+	}]
 }

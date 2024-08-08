@@ -3,8 +3,8 @@
 #include <string>
 #include "pokemon.hpp"
 
-constexpr size_t MOVES_COUNT = 6;
-const std::array<const MoveInfo, MOVES_COUNT> POKEMON_MOVES = {{
+constexpr size_t MOVE_COUNT = 6;
+const std::array<const MoveInfo, MOVE_COUNT> POKEMON_MOVES = {{
 	{
 		.Name = "Tackle",
 		.Type = ElementType::Normal,

@@ -1,4 +1,11 @@
 {
 	"name": "Bulbasaur",
-	"type": ["Grass", "Poison"]
+	"type": ["Grass", "Poison"],
+	"moves": [{
+		"name": "Tackle",
+		"level": 1
+	},{
+		"name": "Growl",
+		"level": 1
+	}]
 }
