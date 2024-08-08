@@ -13,3 +13,9 @@ MoveBattle::MoveBattle(const MoveInfo* info):
 		return;
 	PP = info->PP;
 }
+
+Pokemon Pokemon::CreatePokemonFromInfo(const PokemonInfo* info, uint8_t level)
+{
+	(void)info;
+	(void)level;
+}

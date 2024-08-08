@@ -23,6 +23,7 @@ class BattleInstance
 		BattleInstance();
 	public:
 		void AddPokemon(Pokemon&, BattlePosition);
+		void AddMove(MoveBattle&);
 	private:
 		std::vector<Pokemon> UserPokemon;
 		std::vector<Pokemon> AllyPokemon;

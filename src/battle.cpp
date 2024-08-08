@@ -17,3 +17,8 @@ void BattleInstance::AddPokemon(Pokemon& pokemon, BattlePosition position)
 		case BattlePosition::Enemy: EnemyPokemon.push_back(pokemon); break;
 	}
 }
+
+void BattleInstance::AddMove(MoveBattle& move)
+{
+	(void)move;
+}

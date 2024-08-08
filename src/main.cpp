@@ -6,8 +6,8 @@
 #include <iostream>
 #include <string>
 #include "pokemon.hpp"
-#include "species.hpp"
-#include "moves.hpp"
+#include "generated/species.hpp"
+#include "generated/moves.hpp"
 #include "battle.hpp"
 
 int main(int argc, char** argv)
@@ -17,48 +17,59 @@ int main(int argc, char** argv)
 	Pokemon charmander = {
 		.Info = SPECIES_CHARMANDER,
 		.Moves = {{
-			MoveBattle(MOVE_SCRATCH),
-			MoveBattle(MOVE_EMBER),
-			MoveBattle(MOVE_GROWL),
-			NULL,
+			MOVE_SCRATCH,
+			MOVE_GROWL,
+			nullptr,
+			nullptr,
 		}}
 	};
 	Pokemon bulbasaur = {
 		.Info = SPECIES_BULBASAUR,
 		.Moves = {{
-			MoveBattle(MOVE_TACKLE),
-			MoveBattle(MOVE_ABSORB),
-			MoveBattle(MOVE_TAIL_WHIP),
-			NULL,
+			MOVE_TACKLE,
+			MOVE_TAIL_WHIP,
+			nullptr,
+			nullptr,
 		}}
 	};
 	// Battle
 	BattleInstance battle;
 	battle.AddPokemon(charmander, BattlePosition::User);
 	battle.AddPokemon(bulbasaur, BattlePosition::Enemy);
-	// Write move output
-	for (size_t i = 0; i < charmander.Moves.size(); ++i)
-	{
-		if (charmander.Moves[i].Info == nullptr)
-			continue;
-		if (i != 0 && i < charmander.Moves.size())
-			std::cout << ';';
-		std::cout << '[' << i + 1 << ']' << charmander.Moves[i].Info->Name;
-	}
-	std::cout << '\n';
 	while (true)
 	{
+		// Write move output
+		for (size_t i = 0; i < charmander.Moves.size(); ++i)
+		{
+			auto move = charmander.Moves[i];
+			if (move.Info == nullptr)
+				continue;
+			if (i != 0 && i < charmander.Moves.size())
+				std::cout << " ; ";
+			std::cout << '[' << i + 1 << ']' << move.Info->Name << '(' << (int)move.PP << ')';
+		}
+		std::cout << '\n';
+		// Get move input
 		char input;
 		std::cin >> input;
 		if (input < '0' || input > '4') break;
 		uint8_t move_index = input - '0' - 1;
-		const MoveInfo* moveInfo = charmander.Moves[move_index].Info;
-		if (moveInfo == nullptr)
+		auto move = charmander.Moves[move_index];
+		// Handle invalid move
+		if (move.Info == nullptr)
 		{
 			std::cout << "Invalid move..\n";
 			continue;
 		}
-		std::cout << charmander.Info->Name << " used " << moveInfo->Name << '\n';
+		// Handle no pp
+		else if (move.PP == 0)
+		{
+			std::cout << "No pp left..\n";
+			continue;
+		}
+		std::cout << charmander.Info->Name << " used " << move.Info->Name << '\n';
+		// Simulate battle
+		battle.AddMove(charmander.Moves[move_index]);
 	}
 	return 0;
 }
