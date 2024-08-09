@@ -8,6 +8,8 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
+#include "opengl.hpp"
+
 int main(int argc, char** argv)
 {
 	(void)argc;
@@ -40,14 +42,30 @@ int main(int argc, char** argv)
 	glfwMakeContextCurrent(window);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
+	// OpenGL: Triangle
+	float positions[] = {
+		-0.5f, -0.5f,
+		 0.0f,  0.5f,
+		 0.5f, -0.5f,
+	};
+	uint32_t vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 	// GLFW: Loop
 	while (!glfwWindowShouldClose(window))
 	{
+		/* Rendering */
+		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glfwSwapBuffers(window);
 		/* Events */
 		glfwPollEvents();
-		/* Rendering */
-		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(window);
 	}
 
 	// GLFW: Close
